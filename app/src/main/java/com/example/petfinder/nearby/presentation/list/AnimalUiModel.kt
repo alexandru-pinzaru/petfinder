@@ -1,5 +1,9 @@
 package com.example.petfinder.nearby.presentation.list
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class AnimalUiModel(
     val id: Long,
     val name: String,
@@ -11,4 +15,4 @@ data class AnimalUiModel(
     val description: String?,
     val smallestPhotoUrl: String,
     val largestPhotoUrl: String,
-)
+): Parcelable

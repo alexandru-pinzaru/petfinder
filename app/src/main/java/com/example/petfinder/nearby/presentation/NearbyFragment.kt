@@ -40,7 +40,7 @@ class NearbyFragment : Fragment() {
     }
 
     private fun setupList() {
-        val animalsAdapter = AnimalsAdapter()
+        val animalsAdapter = AnimalsAdapter(requireContext())
         binding.rvAnimals.setHasFixedSize(true)
         binding.rvAnimals.adapter = animalsAdapter
         binding.rvAnimals.layoutManager = GridLayoutManager(requireContext(), 2)

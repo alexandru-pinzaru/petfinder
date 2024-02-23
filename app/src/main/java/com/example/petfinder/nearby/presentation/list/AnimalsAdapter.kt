@@ -1,5 +1,7 @@
 package com.example.petfinder.nearby.presentation.list
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,8 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petfinder.common.setPhotoUrl
 import com.example.petfinder.databinding.RvAnimalItemBinding
+import com.example.petfinder.details.DetailsActivity
 
-class AnimalsAdapter :
+class AnimalsAdapter(private val context: Context,) :
     ListAdapter<AnimalUiModel, AnimalsAdapter.AnimalsViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalsViewHolder {
@@ -30,6 +33,11 @@ class AnimalsAdapter :
         fun bind(item: AnimalUiModel) {
             binding.name.text = item.name
             binding.photo.setPhotoUrl(item.smallestPhotoUrl)
+            binding.root.setOnClickListener {
+                val intent = Intent(context, DetailsActivity::class.java)
+                intent.putExtra("animal", item)
+                context.startActivity(intent)
+            }
         }
     }
 }
