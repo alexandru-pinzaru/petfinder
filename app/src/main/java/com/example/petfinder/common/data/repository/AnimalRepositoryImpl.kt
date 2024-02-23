@@ -18,12 +18,6 @@ class AnimalRepositoryImpl @Inject constructor(
     private val ANIMALS_EXPIRATION = 2 * DateUtils.MINUTE_IN_MILLIS
     private val ANIMALS_TYPE = object : TypeToken<ArrayList<Animal>>() {}.type
 
-    // Mock data
-    private val mock_location = "40.7128, 74.0060"// 10001
-    private val mock_distance = 500
-    private val mock_page = 1
-    private val mock_limit = 100
-
     override fun getAnimals(
         location: String,
         distance: Int,
@@ -31,19 +25,20 @@ class AnimalRepositoryImpl @Inject constructor(
         limit: Int,
     ): Observable<List<Animal>> {
         return getAnimalsFromCacheUnexpired(
-            mock_location,
-            mock_distance,
-            mock_page,
-            mock_limit,
+            location,
+            distance,
+            page,
+            limit,
         )
             .switchIfEmpty(Observable.defer {
                 fetchAnimals(
-                    mock_location,
-                    mock_distance,
-                    mock_page,
-                    mock_limit,
+                    location,
+                    distance,
+                    page,
+                    limit,
                 )
             })
+            .filter { it.isNotEmpty() }
     }
 
     override fun getAnimalById(id: Int): Observable<Animal> {

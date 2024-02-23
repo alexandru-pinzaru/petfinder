@@ -1,12 +1,14 @@
 package com.example.petfinder.common.data.cache
 
+import dagger.Provides
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Observable
+import st.lowlevel.storo.Storo
 import timber.log.Timber
 import java.lang.reflect.Type
-import st.lowlevel.storo.Storo
+import javax.inject.Inject
 
-class StoroCacheManager : CacheManager {
+class StoroCacheManager @Inject constructor() : CacheManager {
 
     private val EXPIRATION_KEY = "_EXPIRATION"
     private val NO_EXPIRATION: Long = 0

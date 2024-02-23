@@ -1,4 +1,4 @@
-package com.example.petfinder.common.data.di
+package com.example.petfinder.common.di
 
 import com.example.petfinder.common.data.networking.AuthenticationInterceptor
 import com.example.petfinder.common.data.networking.Constants
@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,6 +34,7 @@ object NetworkingModule {
             .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
     }
 
     @Provides
