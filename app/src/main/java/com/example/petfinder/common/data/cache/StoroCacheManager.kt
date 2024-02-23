@@ -88,7 +88,7 @@ class StoroCacheManager : CacheManager {
         return Storo.contains(key)
     }
 
-    private fun hadExpired(key: String): Boolean {
+    override fun hadExpired(key: String): Boolean {
         val expiration: Long? = Storo.get(getExpirationKey(key), Long::class.java).execute()
         return expiration != null && expiration < System.currentTimeMillis()
     }

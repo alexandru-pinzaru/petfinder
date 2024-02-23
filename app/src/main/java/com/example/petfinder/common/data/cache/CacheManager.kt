@@ -27,4 +27,5 @@ interface CacheManager {
 
     fun containsKey(key: String): Boolean
 
+    fun hadExpired(key: String): Boolean
 }
