@@ -1,4 +1,4 @@
-package com.example.petfinder.nearby.presentation
+package com.example.petfinder.nearby.presentation.events
 
 sealed class NearbyEvent {
 

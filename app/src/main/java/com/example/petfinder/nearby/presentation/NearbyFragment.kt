@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.petfinder.databinding.FragmentNearbyBinding
+import com.example.petfinder.nearby.presentation.events.ErrorEvent
+import com.example.petfinder.nearby.presentation.events.NearbyEvent
 import com.example.petfinder.nearby.presentation.list.AnimalsAdapter
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,6 +58,14 @@ class NearbyFragment : Fragment() {
     ) {
         binding.progressBar.isVisible = state.loading
         adapter.submitList(state.animals)
+        handleErrors(state.error)
+    }
+
+    private fun handleErrors(error: ErrorEvent<Throwable>?) {
+        val msg = error?.getIfNotHandled() ?: return
+        if (!msg.message.isNullOrEmpty()) {
+            Snackbar.make(requireView(), msg.message!!, Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {

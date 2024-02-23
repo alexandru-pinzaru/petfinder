@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.petfinder.common.applySchedulers
+import com.example.petfinder.common.data.networking.NetworkException
 import com.example.petfinder.nearby.domain.usecase.GetAnimalsUseCase
+import com.example.petfinder.nearby.presentation.events.ErrorEvent
+import com.example.petfinder.nearby.presentation.events.NearbyEvent
 import com.example.petfinder.nearby.presentation.list.AnimalUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -53,20 +56,18 @@ class NearbyViewModel @Inject constructor(
 
     private fun onError(error: Throwable) {
         when (error) {
-//            is NetworkException,
-//            is NetworkUnavailableException -> {
-//                _state.value = state.value!!.copy(
-//                    loading = false,
-//                    error = Event(failure)
-//                )
-//            }
-//
-//            else -> {
-//                _state.value = state.value!!.copy(
-//                    loading = false,
-//                    error = Event(failure)
-//                )
-//            }
+            is NetworkException -> {
+                _state.value = state.value!!.copy(
+                    loading = false,
+                    error = ErrorEvent(error)
+                )
+            }
+            else -> {
+                _state.value = state.value!!.copy(
+                    loading = false,
+                    error = ErrorEvent(error)
+                )
+            }
         }
     }
 }
