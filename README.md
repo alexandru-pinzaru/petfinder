@@ -1,8 +1,7 @@
 # petfinder
-Relevant code in the following packages:
+Clean architecture showcase in the following packages:
 - com.example.petfinder.nearby
 - com.example.petfinder.common
-- com.example.petfinder.details
 
 com.example.petfinder.nearby.domain.usecase.GetAnimalsUseCase contains mock data for API requests, like user location and pagination data.
 
