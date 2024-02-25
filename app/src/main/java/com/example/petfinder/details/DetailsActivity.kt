@@ -2,6 +2,7 @@ package com.example.petfinder.details
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.petfinder.common.setPhotoUrl
 import com.example.petfinder.databinding.ActivityDetailsBinding
 import com.example.petfinder.nearby.presentation.list.AnimalUiModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +30,7 @@ class DetailsActivity : AppCompatActivity() {
             gender.text = "Gender: ${animalUiModel.gender}"
             status.text = "Status: ${animalUiModel.status}"
             distance.text = "Distance: ${animalUiModel.distance?.roundToInt()} miles"
+            photo.setPhotoUrl(animalUiModel.largestPhotoUrl)
         }
     }
 }
